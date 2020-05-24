@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private float spawnRate = 10;
 
+    private List<Transform> spawnedPoints = new List<Transform>();
     private Transform lastSpawn = null;
 
     // Start is called before the first frame update
