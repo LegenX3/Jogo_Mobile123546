@@ -12,8 +12,10 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private float spawnRate = 10;
 
-    private List<Transform> spawnedPoints = new List<Transform>();
     private Transform lastSpawn = null;
+
+    [HideInInspector]
+    public List<Transform> spawnedPoints = new List<Transform>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +25,15 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
+        if (spawnsPoints.Count == spawnedPoints.Count)
+            return;
+
         Transform currentSpawn = lastSpawn;
 
-        while (currentSpawn == lastSpawn) { currentSpawn = spawnsPoints[Random.Range(0, spawnsPoints.Count)]; }
+        while (spawnedPoints.Contains(currentSpawn)) { currentSpawn = spawnsPoints[Random.Range(0, spawnsPoints.Count)]; }
 
         lastSpawn = currentSpawn;
+        spawnedPoints.Add(lastSpawn);
         Instantiate(spawnPrefab, currentSpawn);
     }
 }

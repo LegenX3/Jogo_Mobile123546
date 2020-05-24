@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-
+    private Spawner mySpawner;
     private bool received = false;
+
+    private void Start()
+    {
+        mySpawner = transform.root.GetComponent<Spawner>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +19,9 @@ public class NPC : MonoBehaviour
             received = true;
             GameManager.score++;
 
-            gameObject.SetActive(false);
+            if (mySpawner != null)
+                mySpawner.spawnedPoints.Remove(transform.parent);
+            Destroy(gameObject);
         }
     }
 }
