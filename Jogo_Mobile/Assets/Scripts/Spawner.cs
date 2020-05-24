@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
     [SerializeField]
-    private GameObject spawnPrefab = null;
-    [SerializeField]
-    private List<Transform> spawnsPoints = new List<Transform>();
+    private List<NPC> npcs = new List<NPC>();
     [SerializeField]
     private float spawnRate = 10;
 
-    private Transform lastSpawn = null;
+    private NPC lastSpawn = null;
 
     [HideInInspector]
-    public List<Transform> spawnedPoints = new List<Transform>();
+    public List<NPC> spawnedPoints = new List<NPC>();
 
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Spawn", 0, spawnRate);
@@ -25,15 +21,21 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        if (spawnsPoints.Count == spawnedPoints.Count)
+        if (npcs.Count == spawnedPoints.Count)
             return;
 
-        Transform currentSpawn = lastSpawn;
+        NPC currentSpawn = lastSpawn;
 
-        while (spawnedPoints.Contains(currentSpawn)) { currentSpawn = spawnsPoints[Random.Range(0, spawnsPoints.Count)]; }
+        if (spawnedPoints.Count == 0)
+            currentSpawn = npcs[Random.Range(0, npcs.Count)];
+        else
+            while (spawnedPoints.Contains(currentSpawn) || currentSpawn == lastSpawn) { currentSpawn = npcs[Random.Range(0, npcs.Count)]; }
 
         lastSpawn = currentSpawn;
         spawnedPoints.Add(lastSpawn);
-        Instantiate(spawnPrefab, currentSpawn);
+
+        currentSpawn.received = false;
+        currentSpawn.gameObject.SetActive(true);
+        currentSpawn.icon.SetActive(true);
     }
 }

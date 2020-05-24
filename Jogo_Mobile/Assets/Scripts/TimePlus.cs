@@ -5,11 +5,11 @@ using UnityEngine;
 public class TimePlus : MonoBehaviour
 {
 
-    private Spawner mySpawner;
+    private ItemSpawner mySpawner;
 
     private void Start()
     {
-        mySpawner = transform.root.GetComponent<Spawner>();
+        mySpawner = transform.root.GetComponent<ItemSpawner>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,8 +18,8 @@ public class TimePlus : MonoBehaviour
         {
             GameManager.timer = GameManager.timer + 10;
             if (mySpawner != null)
-                mySpawner.spawnedPoints.Remove(transform);
-            Destroy(gameObject);
+                mySpawner.spawnedPoints.Remove(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
