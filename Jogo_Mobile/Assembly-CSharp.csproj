@@ -62,7 +62,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Cars\Scripts\CarController.cs" />
+    <Compile Include="Assets\Scripts\CarController.cs" />
+    <Compile Include="Assets\Scripts\CarDeliver.cs" />
+    <Compile Include="Assets\Scripts\CarUI.cs" />
+    <Compile Include="Assets\Scripts\Deliver.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\NPC.cs" />
+    <Compile Include="Assets\Scripts\Pause.cs" />
+    <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\Scripts\TimePlus.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/leopm/Documents/GitHub/Jogo_Mobile/Jogo_Mobile/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

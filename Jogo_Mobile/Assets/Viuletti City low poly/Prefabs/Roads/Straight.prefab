@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33535205949754610}
   - component: {fileID: 23494047746070658}
   - component: {fileID: 651415587715636711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Height Road straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4386691475404770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 1499449674445770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.03}
   m_Children:
   - {fileID: 4633400993387186}
   m_Father: {fileID: 0}
