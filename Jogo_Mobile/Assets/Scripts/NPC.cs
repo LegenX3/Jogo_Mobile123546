@@ -5,17 +5,19 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     private Spawner mySpawner;
-    private MeshRenderer render;
     private CarController player;
+    private Animator anim;
 
     [HideInInspector]
     public bool received = false;
 
     public GameObject icon;
+    public GameObject area;
 
     private void Start()
     {
         player = FindObjectOfType<CarController>();
+        anim = GetComponent<Animator>();
 
         mySpawner = transform.root.GetComponent<Spawner>();
 
@@ -30,6 +32,8 @@ public class NPC : MonoBehaviour
                 mySpawner.spawnedPoints.Remove(this);
             gameObject.SetActive(false);
         }
+
+        anim.SetBool("Received", received);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,8 +41,9 @@ public class NPC : MonoBehaviour
         if(other.tag == "Deliver" && !received)
         {
             received = true;
-            GameManager.score++;
+            GameManager.manager.score++;
             icon.SetActive(false);
+            area.SetActive(false);
         }
     }
 }

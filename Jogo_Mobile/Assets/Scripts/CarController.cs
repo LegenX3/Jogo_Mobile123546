@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public enum CarState
 {
@@ -42,22 +43,21 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.state == GameState.PLAYING)
+        if (GameManager.manager.state == GameState.PLAYING)
         {
             switch (state)
             {
                 case CarState.STANDARD:
 
-                    if (Input.touchCount > 0)
+                    if (Input.touchCount > 0 && !IsPointerOverUIObject(Input.GetTouch(0)))
+                    {
                         Drive(Input.GetTouch(0).position);
+                    }                      
 
-                    if (Input.GetMouseButton(0))
-                        Drive(Input.mousePosition);
-
-                    if (Input.touchCount > 0 || Input.GetMouseButton(0))
+                    if (Input.touchCount > 0)
                         rb.drag = 0;
                     else
-                        rb.drag = 2;
+                        rb.drag = 4;
 
                     if (!DetectRoad())
                     {
@@ -68,6 +68,8 @@ public class CarController : MonoBehaviour
                     break;
             }
         }
+        else
+            rb.drag = 4;
     }
 
     void Drive(Vector3 clickPos)
@@ -97,6 +99,15 @@ public class CarController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
 
         state = CarState.STANDARD;
+    }
+
+    private bool IsPointerOverUIObject(Touch input)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(input.position.x, input.position.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 
     private void OnDrawGizmosSelected()

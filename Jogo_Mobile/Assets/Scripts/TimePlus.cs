@@ -16,7 +16,7 @@ public class TimePlus : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameManager.timer = GameManager.timer + 10;
+            GameManager.manager.timer += 10;
             if (mySpawner != null)
                 mySpawner.spawnedPoints.Remove(gameObject);
             gameObject.SetActive(false);

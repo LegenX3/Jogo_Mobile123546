@@ -37,5 +37,6 @@ public class Spawner : MonoBehaviour
         currentSpawn.received = false;
         currentSpawn.gameObject.SetActive(true);
         currentSpawn.icon.SetActive(true);
+        currentSpawn.area.SetActive(true);
     }
 }

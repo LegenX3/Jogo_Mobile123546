@@ -9,6 +9,7 @@ public class CarUI : MonoBehaviour
     [SerializeField]
     private GameObject pauseMenuPrefab = null;
 
+
     private GameObject pauseMenu;
     private Canvas canvas;
     private Camera mainCam;
@@ -24,13 +25,9 @@ public class CarUI : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PauseButton()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && GameManager.state == GameState.PLAYING)
-        {
-            GameManager.state = GameState.PAUSED;
-            pauseMenu.SetActive(true);
-        }
+        GameManager.manager.state = GameState.PAUSED;
+        pauseMenu.SetActive(true);
     }
 }

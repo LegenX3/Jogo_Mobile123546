@@ -14,20 +14,27 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
 
+    public static GameManager manager;
+
     [HideInInspector]
-    public static float timer = 60;
+    public float timer = 60;
     [HideInInspector]
-    public static int score = 0;
+    public int score = 0;
     [HideInInspector]
-    public static GameState state = new GameState();
+    public GameState state = new GameState();
 
 
     [SerializeField]
     private Text timerText = null;
     [SerializeField]
-    private Text scoreText = null;
+    private Text scoreText = null, finalScoreText = null;
     [SerializeField]
     private Text countdownText = null;
+
+    [SerializeField]
+    private GameObject gameOverScreen = null;
+    [SerializeField]
+    private GameObject pauseButton = null;
 
 
     private int countdownTimer = 3;
@@ -37,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        manager = this;
+
         state = GameState.COUNTDOWN;
         deltaTime = Time.fixedDeltaTime;
 
@@ -61,8 +70,12 @@ public class GameManager : MonoBehaviour
             }
 
             if (seconds <= 0)
+            {
+                finalScoreText.text = "Pontuação Final:\n" + score.ToString();
+                gameOverScreen.SetActive(true);
                 state = GameState.FINISHED;
-        }
+            }
+        }            
     }
     
     private IEnumerator Countdown()
@@ -76,6 +89,7 @@ public class GameManager : MonoBehaviour
         }
 
         countdownText.enabled = false;
+        pauseButton.SetActive(true);
         state = GameState.PLAYING;
     }
 

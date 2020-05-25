@@ -7,7 +7,7 @@ public class Pause : MonoBehaviour
 {
     public void Resume()
     {
-        GameManager.state = GameState.PLAYING;
+        GameManager.manager.state = GameState.PLAYING;
         gameObject.SetActive(false);
     }
 

@@ -12,7 +12,12 @@ public class MainMenu : MonoBehaviour
     }
     public void BackToMenu()
     {
-        SceneManager.LoadScene("menu");
+        SceneManager.LoadScene("Menu");
+    }
+    public void ChangeVolume(float newVolume)
+    {
+        GlobalSettings.singleton.volume = newVolume;
+        GlobalSettings.singleton.UpdateVolume();
     }
     public void QuitGame()
     {
